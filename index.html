@@ -70,9 +70,16 @@
       font-size: clamp(0.95rem, 1.4vw, 1.1rem);
       margin: 0 0 1.25rem 0;
     }
-    .art {
+    .game-row {
+      display: flex;
+      align-items: center;
+      gap: clamp(0.9rem, 2vw, 1.6rem);
       width: 100%;
-      max-width: 360px;
+      margin-bottom: 1.1rem;
+    }
+    .art {
+      flex: 1 1 0;
+      max-width: 260px;
       aspect-ratio: 5 / 7;
       border-radius: 14px;
       background: #0a0a10;
@@ -80,15 +87,15 @@
       display: flex;
       align-items: center;
       justify-content: center;
-      margin-bottom: 1.25rem;
       box-shadow: 0 8px 22px rgba(0,0,0,0.35);
     }
     .art img { width: 100%; height: 100%; object-fit: contain; display: block; }
     .art svg { width: 62%; height: 62%; }
     .qr {
+      flex: 0 0 auto;
       background: #ffffff;
-      padding: 14px;
-      border-radius: 12px;
+      padding: 8px;
+      border-radius: 10px;
       line-height: 0;
     }
     .qr img, .qr canvas { display: block; }
@@ -111,25 +118,29 @@
   <div class="games">
     <div class="game">
       <h2>Lapping It Up</h2>
-      <div class="art">
-        <!-- Title-screen art pulled from the Lapping It Up main deck's
-             "Title Screen" card on castle.xyz. -->
-        <img src="https://image.castle.xyz/7550acb9c336d7839ce9aa602e093ca1?h=800&format=png"
-             alt="Lapping It Up title screen">
+      <div class="game-row">
+        <div class="art">
+          <!-- Title-screen art pulled from the Lapping It Up main deck's
+               "Title Screen" card on castle.xyz. -->
+          <img src="https://image.castle.xyz/7550acb9c336d7839ce9aa602e093ca1?h=800&format=png"
+               alt="Lapping It Up title screen">
+        </div>
+        <div id="qr-lap" class="qr"></div>
       </div>
-      <div id="qr-lap" class="qr"></div>
       <p class="hint">Beat the daily lap.</p>
     </div>
     <div class="game">
       <h2>Spare Me</h2>
-      <div class="art">
-        <!-- Placeholder bowling art: Twemoji 🎳 (CC-BY 4.0). Replace with
-             a real Spare Me title graphic when ready. -->
-        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 36 36" aria-label="Bowling ball and pins">
-          <image href="https://cdn.jsdelivr.net/gh/twitter/twemoji@latest/assets/svg/1f3b3.svg" width="36" height="36"/>
-        </svg>
+      <div class="game-row">
+        <div class="art">
+          <!-- Placeholder bowling art: Twemoji 🎳 (CC-BY 4.0). Replace with
+               a real Spare Me title graphic when ready. -->
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 36 36" aria-label="Bowling ball and pins">
+            <image href="https://cdn.jsdelivr.net/gh/twitter/twemoji@latest/assets/svg/1f3b3.svg" width="36" height="36"/>
+          </svg>
+        </div>
+        <div id="qr-bowl" class="qr"></div>
       </div>
-      <div id="qr-bowl" class="qr"></div>
       <p class="hint">Knock them down.</p>
     </div>
   </div>
@@ -148,8 +159,9 @@
     function render(id, url) {
       const el = document.getElementById(id);
       if (!el) return;
-      // Scale QR to roughly 60% of a card's inner width, but clamp.
-      const size = Math.max(240, Math.min(420, Math.round(window.innerWidth * 0.32)));
+      // ~25% of the prior sizing so QR sits next to the art within the
+      // card, but clamped big enough to stay scannable at arm's length.
+      const size = Math.max(80, Math.min(140, Math.round(window.innerWidth * 0.08)));
       new QRCode(el, {
         text: url,
         width: size,
