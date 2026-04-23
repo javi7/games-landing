@@ -70,6 +70,21 @@
       font-size: clamp(0.95rem, 1.4vw, 1.1rem);
       margin: 0 0 1.25rem 0;
     }
+    .art {
+      width: 100%;
+      max-width: 360px;
+      aspect-ratio: 5 / 7;
+      border-radius: 14px;
+      background: #0a0a10;
+      overflow: hidden;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-bottom: 1.25rem;
+      box-shadow: 0 8px 22px rgba(0,0,0,0.35);
+    }
+    .art img { width: 100%; height: 100%; object-fit: cover; display: block; }
+    .art svg { width: 62%; height: 62%; }
     .qr {
       background: #ffffff;
       padding: 14px;
@@ -100,12 +115,25 @@
     <div class="game">
       <h2>Lapping It Up</h2>
       <p class="sub">Racing · alpha build</p>
+      <div class="art">
+        <!-- Title-screen art pulled from the Lapping It Up main deck's
+             "Title Screen" card on castle.xyz. -->
+        <img src="https://image.castle.xyz/7550acb9c336d7839ce9aa602e093ca1?h=800&format=png"
+             alt="Lapping It Up title screen">
+      </div>
       <div id="qr-lap" class="qr"></div>
       <p class="hint">Beat the daily lap.</p>
     </div>
     <div class="game">
-      <h2>Bowling</h2>
-      <p class="sub">Lanes · full release</p>
+      <h2>Spare Me</h2>
+      <p class="sub">Bowling · main release</p>
+      <div class="art">
+        <!-- Placeholder bowling art: Twemoji 🎳 (CC-BY 4.0). Replace with
+             a real Spare Me title graphic when ready. -->
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 36 36" aria-label="Bowling ball and pins">
+          <image href="https://cdn.jsdelivr.net/gh/twitter/twemoji@latest/assets/svg/1f3b3.svg" width="36" height="36"/>
+        </svg>
+      </div>
       <div id="qr-bowl" class="qr"></div>
       <p class="hint">Knock them down.</p>
     </div>
